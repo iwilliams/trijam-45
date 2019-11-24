@@ -1,6 +1,8 @@
 Made for the [Trijam #46](https://itch.io/jam/trijam-46) on itch.io. The theme was "13 Legs" and the game was created in just under 3 hours.
 
-### Programing: Ian Williams
+Play at: [https://iwilliams.itch.io/leggy-transformation](https://iwilliams.itch.io/leggy-transformation)
+
+### Programming: Ian Williams
 [https://www.twitter.com/ianawill](https://www.twitter.com/ianawill)
 
 ### Music: Spooky Dungeon
