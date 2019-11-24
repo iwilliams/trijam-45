@@ -1,3 +1,175 @@
-[gd_scene format=2]
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://cactus.png" type="Texture" id=1]
+[ext_resource path="res://LegSphere.gd" type="Script" id=2]
+[ext_resource path="res://Leg.tscn" type="PackedScene" id=3]
+[ext_resource path="res://VCR_OSD_MONO_1.001.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://spooky.ogg" type="AudioStream" id=5]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.612245 )
+colors = PoolColorArray( 0.113663, 0.301416, 0.746094, 1, 0.703125, 0.145569, 0.145569, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+font_data = ExtResource( 4 )
+
+[sub_resource type="Animation" id=8]
+resource_name = "Open"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Polygon2D3:material:shader_param/alpha")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 1.0, 1.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Win"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Win:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 357.411, -117.62 ), Vector2( 357.411, 200 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Polygon2D3:material:shader_param/alpha")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[sub_resource type="Shader" id=6]
+code = "shader_type canvas_item;
+uniform float alpha = 1;
+void vertex() {
+  COLOR = vec4(COLOR.r, COLOR.g, COLOR.b, alpha);
+}
+
+"
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = SubResource( 6 )
+shader_param/alpha = 0.0
+
+[sub_resource type="DynamicFont" id=4]
+size = 64
+font_data = ExtResource( 4 )
 
 [node name="Main" type="Node2D"]
+
+[node name="Polygon2D2" type="Polygon2D" parent="."]
+texture = SubResource( 2 )
+texture_rotation_degrees = -90.0
+polygon = PoolVector2Array( 0, 0, 1024, 0, 1024, 600, 0, 600 )
+
+[node name="Cactus" type="Polygon2D" parent="."]
+position = Vector2( 2.51746, 412.667 )
+texture = ExtResource( 1 )
+polygon = PoolVector2Array( 0, 0, 1024, 0, 1024, 200, 0, 200 )
+
+[node name="LegSphere" type="Node2D" parent="."]
+editor/display_folded = true
+position = Vector2( 162.954, 430.237 )
+script = ExtResource( 2 )
+
+[node name="Circle" type="Node2D" parent="LegSphere"]
+editor/display_folded = true
+
+[node name="Leg1" parent="LegSphere/Circle" instance=ExtResource( 3 )]
+
+[node name="Leg2" parent="LegSphere/Circle" instance=ExtResource( 3 )]
+rotation = 0.483456
+
+[node name="Leg3" parent="LegSphere/Circle" instance=ExtResource( 3 )]
+rotation = 0.966912
+
+[node name="Leg4" parent="LegSphere/Circle" instance=ExtResource( 3 )]
+rotation = 1.45037
+
+[node name="Leg5" parent="LegSphere/Circle" instance=ExtResource( 3 )]
+rotation = 1.93382
+
+[node name="Leg6" parent="LegSphere/Circle" instance=ExtResource( 3 )]
+rotation = 2.41728
+
+[node name="Leg7" parent="LegSphere/Circle" instance=ExtResource( 3 )]
+rotation = 2.89899
+
+[node name="Leg8" parent="LegSphere/Circle" instance=ExtResource( 3 )]
+rotation = 3.38245
+
+[node name="Leg9" parent="LegSphere/Circle" instance=ExtResource( 3 )]
+rotation = 3.8659
+
+[node name="Leg10" parent="LegSphere/Circle" instance=ExtResource( 3 )]
+rotation = 4.34936
+
+[node name="Leg11" parent="LegSphere/Circle" instance=ExtResource( 3 )]
+rotation = 4.83282
+
+[node name="Leg12" parent="LegSphere/Circle" instance=ExtResource( 3 )]
+rotation = 5.31627
+
+[node name="Leg13" parent="LegSphere/Circle" instance=ExtResource( 3 )]
+rotation = 5.79973
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2( 0, 561.201 )
+color = Color( 0.654902, 0.27451, 0.27451, 1 )
+polygon = PoolVector2Array( 0, 0, 1023, 0, 1024, 100, 0, 100 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 7.71635
+margin_top = 4.28687
+margin_right = 216.716
+margin_bottom = 33.2869
+custom_fonts/font = SubResource( 3 )
+text = "Mistakes: 0"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Open = SubResource( 8 )
+anims/Win = SubResource( 5 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+autoplay = true
+
+[node name="Polygon2D3" type="Polygon2D" parent="."]
+material = SubResource( 7 )
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( -53.5155, -53.3793, 1140.53, -79.4077, 1143.79, 206.904, 1130.77, 753.499, -190.164, 730.724 )
+
+[node name="Win" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 357.411
+margin_top = -117.62
+margin_right = 661.411
+margin_bottom = -60.6204
+custom_fonts/font = SubResource( 4 )
+text = "The End."
